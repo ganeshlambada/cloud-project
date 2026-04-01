@@ -1,193 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Ganesh | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManage | College Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef6ff;
-    color: #1e293b;
-}
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-/* NAVBAR */
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
+        .active-link {
+            background-color: #2563eb !important;
+            color: white;
+        }
 
-header h2 {
-    color: #3b82f6;
-}
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
 
-nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #475569;
-    font-size: 14px;
-}
-
-nav a:hover {
-    color: #3b82f6;
-}
-
-/* HERO */
-.hero {
-    padding: 80px 60px;
-}
-
-.hero h1 {
-    font-size: 42px;
-}
-
-.hero span {
-    color: #3b82f6;
-}
-
-.hero h3 {
-    margin-top: 10px;
-    color: #2563eb;
-}
-
-.hero p {
-    margin-top: 15px;
-    max-width: 600px;
-    line-height: 1.7;
-}
-
-/* BUTTONS */
-.buttons {
-    margin-top: 25px;
-}
-
-.btn {
-    padding: 10px 18px;
-    border-radius: 20px;
-    border: none;
-    margin-right: 10px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.primary {
-    background: #3b82f6;
-    color: white;
-}
-
-.secondary {
-    background: #e0ecff;
-    color: #2563eb;
-}
-
-/* SECTION */
-.section {
-    padding: 60px;
-}
-
-.section h2 {
-    color: #3b82f6;
-    margin-bottom: 20px;
-}
-
-/* CARD */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: white;
-    font-size: 14px;
-}
-</style>
+        /* Modal Overlay Transition */
+        #studentModal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </head>
+<body class="overflow-hidden">
 
-<body>
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-slate-300 flex-shrink-0 hidden md:flex flex-col">
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg">
+                    <i class="fas fa-university text-white text-xl"></i>
+                </div>
+                <h1 class="text-white font-bold text-xl tracking-tight">EduManage</h1>
+            </div>
 
-<header>
-    <h2>Ganesh</h2>
-    <nav>
-        <a href="#">About</a>
-        <a href="#">Skills</a>
-        <a href="#">Projects</a>
-        <a href="#">Contact</a>
-    </nav>
-</header>
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <a href="#" class="sidebar-link active-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Faculty</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedule</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg transition-all">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Fees & Finance</span>
+                </a>
+            </nav>
 
-<section class="hero">
-    <h1>Hi, I'm <span>Ganesh</span></h1>
-    <h3>Cloud & DevOps Enthusiast</h3>
+            <div class="p-4 mt-auto border-t border-slate-800">
+                <div class="flex items-center gap-3 p-2">
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">AD</div>
+                    <div>
+                        <p class="text-sm font-medium text-white">Admin User</p>
+                        <p class="text-xs text-slate-500">Super Admin</p>
+                    </div>
+                </div>
+                <button class="w-full mt-4 flex items-center justify-center gap-2 p-2 text-sm bg-slate-800 hover:bg-red-900/30 hover:text-red-400 rounded-lg transition-colors">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
 
-    <p>
-        B.Tech student specializing in Cloud Computing and DevOps. 
-        I build scalable applications using AWS, Flask, and deployment tools 
-        like Gunicorn and Nginx. Passionate about automation and real-world solutions.
-    </p>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            
+            <!-- Top Header -->
+            <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <div class="flex items-center gap-4 flex-1">
+                    <button class="md:hidden text-slate-600"><i class="fas fa-bars"></i></button>
+                    <div class="relative w-full max-w-md hidden sm:block">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" placeholder="Search records, students, faculty..." class="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-full text-sm focus:ring-2 focus:ring-blue-500 transition-all outline-none">
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full">
+                        <i class="far fa-bell"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <button class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200" onclick="toggleModal(true)">
+                        <i class="fas fa-plus"></i> <span class="hidden sm:inline">Add Student</span>
+                    </button>
+                </div>
+            </header>
 
-    <div class="buttons">
-        <button class="btn primary">View Projects</button>
-        <button class="btn secondary">GitHub</button>
-        <button class="btn secondary">LinkedIn</button>
-        <button class="btn secondary">Resume</button>
+            <!-- Scrollable Content Area -->
+            <div class="flex-1 overflow-y-auto p-8">
+                
+                <!-- Welcome Section -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800">Academic Overview</h2>
+                    <p class="text-slate-500">Welcome back! Here's what's happening in your college today.</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                                <i class="fas fa-user-graduate text-xl"></i>
+                            </div>
+                            <span class="text-green-500 text-xs font-bold bg-green-50 px-2 py-1 rounded">+12%</span>
+                        </div>
+                        <h3 class="text-slate-500 text-sm font-medium uppercase tracking-wider">Total Students</h3>
+                        <p class="text-3xl font-bold text-slate-800 mt-1">2,450</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                                <i class="fas fa-chalkboard-teacher text-xl"></i>
+                            </div>
+                            <span class="text-slate-400 text-xs font-bold bg-slate-50 px-2 py-1 rounded">Stable</span>
+                        </div>
+                        <h3 class="text-slate-500 text-sm font-medium uppercase tracking-wider">Active Faculty</h3>
+                        <p class="text-3xl font-bold text-slate-800 mt-1">184</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+                                <i class="fas fa-book-reader text-xl"></i>
+                            </div>
+                            <span class="text-green-500 text-xs font-bold bg-green-50 px-2 py-1 rounded">+4</span>
+                        </div>
+                        <h3 class="text-slate-500 text-sm font-medium uppercase tracking-wider">Total Courses</h3>
+                        <p class="text-3xl font-bold text-slate-800 mt-1">42</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                                <i class="fas fa-dollar-sign text-xl"></i>
+                            </div>
+                            <span class="text-red-500 text-xs font-bold bg-red-50 px-2 py-1 rounded">-2%</span>
+                        </div>
+                        <h3 class="text-slate-500 text-sm font-medium uppercase tracking-wider">Revenue (Monthly)</h3>
+                        <p class="text-3xl font-bold text-slate-800 mt-1">$84.2k</p>
+                    </div>
+                </div>
+
+                <!-- Main Data Section -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                    
+                    <!-- Table Section (Student Management) -->
+                    <div class="xl:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                            <h3 class="font-bold text-slate-800 text-lg">Recent Enrollments</h3>
+                            <button class="text-blue-600 text-sm font-semibold hover:underline">View All Records</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
+                                    <tr>
+                                        <th class="px-6 py-4">Student</th>
+                                        <th class="px-6 py-4">ID</th>
+                                        <th class="px-6 py-4">Course</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4 text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100" id="studentTableBody">
+                                    <!-- Dynamic Rows Loaded Here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Calendar / Notice Board -->
+                    <div class="space-y-8">
+                        <!-- Notice Board -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                            <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                                <i class="fas fa-bullhorn text-orange-500"></i> Notice Board
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 text-center w-12">
+                                        <span class="block text-xs font-bold text-slate-400 uppercase">Oct</span>
+                                        <span class="block text-xl font-bold text-slate-800">12</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800">Annual Cultural Fest 2024</h4>
+                                        <p class="text-xs text-slate-500 line-clamp-1">Register your participation in the main hall by 5 PM today.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer border-l-4 border-orange-500">
+                                    <div class="flex-shrink-0 text-center w-12">
+                                        <span class="block text-xs font-bold text-slate-400 uppercase">Oct</span>
+                                        <span class="block text-xl font-bold text-slate-800">15</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800">Mid-Term Examinations</h4>
+                                        <p class="text-xs text-slate-500 line-clamp-1">Exam schedules for Computer Science dept updated.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer border-l-4 border-emerald-500">
+                                    <div class="flex-shrink-0 text-center w-12">
+                                        <span class="block text-xs font-bold text-slate-400 uppercase">Oct</span>
+                                        <span class="block text-xl font-bold text-slate-800">20</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-800">Convocation Ceremony</h4>
+                                        <p class="text-xs text-slate-500 line-clamp-1">Invite list for the class of 2023 published.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Department Performance -->
+                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-6 rounded-2xl text-white shadow-xl">
+                            <h3 class="font-bold text-lg mb-4">Storage Usage</h3>
+                            <div class="flex items-end justify-between mb-2">
+                                <span class="text-sm opacity-80">College Database</span>
+                                <span class="text-sm font-bold">75%</span>
+                            </div>
+                            <div class="w-full bg-white/20 rounded-full h-2 mb-4">
+                                <div class="bg-white h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <p class="text-xs opacity-70">1.5GB of 2.0GB used. Consider archiving old student records.</p>
+                            <button class="w-full mt-4 py-2 bg-white text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors">Manage Data</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
     </div>
-</section>
 
-<section class="section">
-    <h2>About Me</h2>
-    <div class="card">
-        <p>
-            I am a B.Tech student focused on DevOps and Cloud technologies. 
-            I enjoy building and deploying real-world applications using AWS, Docker, and backend frameworks.
-        </p>
+    <!-- Modal for Adding Student -->
+    <div id="studentModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all scale-95 duration-300" id="modalContainer">
+            <div class="bg-slate-50 px-8 py-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-slate-800">Register New Student</h3>
+                <button onclick="toggleModal(false)" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <form id="addStudentForm" class="p-8 space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-500 uppercase">First Name</label>
+                        <input type="text" name="fname" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-500 uppercase">Last Name</label>
+                        <input type="text" name="lname" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Email Address</label>
+                    <input type="email" name="email" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Enrolled Course</label>
+                    <select name="course" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option>Computer Science</option>
+                        <option>Business Administration</option>
+                        <option>Mechanical Engineering</option>
+                        <option>Data Analytics</option>
+                    </select>
+                </div>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" onclick="toggleModal(false)" class="flex-1 py-3 border border-slate-200 rounded-lg font-bold text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
+                    <button type="submit" class="flex-1 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all">Save Student</button>
+                </div>
+            </form>
+        </div>
     </div>
-</section>
 
-<section class="section">
-    <h2>Skills</h2>
-    <div class="card">
-        AWS • Python • Flask • Docker • Git • GitHub • Nginx • Linux • CI/CD
-    </div>
-</section>
-
-<section class="section">
-    <h2>Projects</h2>
-
-    <div class="card">
-        <h3>AWS Cloud Deployment</h3>
-        <p>Deployed Flask app using Gunicorn & Nginx on AWS EC2.</p>
+    <!-- Notification Toast (Hidden by default) -->
+    <div id="toast" class="fixed bottom-8 right-8 bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-3">
+        <i class="fas fa-check-circle text-green-400"></i>
+        <span id="toastMessage">Student added successfully!</span>
     </div>
 
-    <div class="card">
-        <h3>Task Manager App</h3>
-        <p>Full-stack project with GitHub version control.</p>
-    </div>
+    <script>
+        // Mock Data
+        let students = [
+            { name: "Julian Wan", id: "ST-2023-01", course: "Computer Science", status: "Active", avatar: "JW" },
+            { name: "Sarah Smith", id: "ST-2023-04", course: "Business Admin", status: "Active", avatar: "SS" },
+            { name: "Mark Wilson", id: "ST-2022-88", course: "Data Analytics", status: "Pending", avatar: "MW" },
+            { name: "Elena Gilbert", id: "ST-2023-12", course: "Mechanical Eng.", status: "Active", avatar: "EG" },
+            { name: "Robert Fox", id: "ST-2023-15", course: "Computer Science", status: "Inactive", avatar: "RF" }
+        ];
 
-</section>
+        // UI Helpers
+        const modal = document.getElementById('studentModal');
+        const modalContainer = document.getElementById('modalContainer');
+        const tableBody = document.getElementById('studentTableBody');
+        const toast = document.getElementById('toast');
 
-<section class="section">
-    <h2>Contact</h2>
-    <div class="card">
-        <p><strong>Email:</strong> abhiram@email.com</p>
-        <p><strong>Phone:</strong> +91-9876543210</p>
-        <p><strong>GitHub:</strong> github.com/abhiram</p>
-        <p><strong>LinkedIn:</strong> linkedin.com/in/abhiram</p>
-    </div>
-</section>
+        function toggleModal(show) {
+            if (show) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContainer.classList.remove('scale-95');
+                modalContainer.classList.add('scale-100');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modalContainer.classList.remove('scale-100');
+                modalContainer.classList.add('scale-95');
+            }
+        }
 
-<footer>
-    © 2026 Ganesh | Portfolio
-</footer>
+        function renderStudents() {
+            tableBody.innerHTML = students.map((s, index) => `
+                <tr class="hover:bg-slate-50 transition-colors group">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">${s.avatar}</div>
+                            <span class="font-medium text-slate-700">${s.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-500">${s.id}</td>
+                    <td class="px-6 py-4 text-sm text-slate-600 font-medium">${s.course}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase ${
+                            s.status === 'Active' ? 'bg-green-100 text-green-600' : 
+                            s.status === 'Pending' ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-400'
+                        }">${s.status}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <button class="p-2 text-slate-400 hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteStudent(${index})" class="p-2 text-slate-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
 
+        function showToast(msg) {
+            toast.querySelector('#toastMessage').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function deleteStudent(index) {
+            students.splice(index, 1);
+            renderStudents();
+            showToast("Student record deleted.");
+        }
+
+        // Event Listeners
+        document.getElementById('addStudentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const newStudent = {
+                name: `${formData.get('fname')} ${formData.get('lname')}`,
+                id: `ST-2024-${Math.floor(Math.random() * 100)}`,
+                course: formData.get('course'),
+                status: "Active",
+                avatar: formData.get('fname').charAt(0) + formData.get('lname').charAt(0)
+            };
+            
+            students.unshift(newStudent);
+            renderStudents();
+            toggleModal(false);
+            e.target.reset();
+            showToast("Student registered successfully!");
+        });
+
+        // Initialize
+        window.onload = () => {
+            renderStudents();
+        };
+    </script>
 </body>
 </html>
